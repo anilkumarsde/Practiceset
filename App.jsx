@@ -5,9 +5,9 @@ import First from './component/First'
 
 const App = () => {
   return (
-    <View>
+   
       <First />
-    </View>
+
   )
 }
 
