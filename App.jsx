@@ -6,12 +6,15 @@ import FilterList from './component/FilterList'
 import Flatlis from './component/Flatlis'
 import UseState from './component/UseState'
 import NewUseState from './component/NewUseState'
+import Toggle from './component/Toggle'
+import Textinputman from './component/Textinputman'
+import Addnumber from './component/Addnumber'
 
 
 const App = () => {
   return (
 
-<NewUseState/>
+<Addnumber />
 
   )
 }
