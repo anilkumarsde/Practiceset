@@ -57,11 +57,13 @@ const styles = StyleSheet.create({
     container:{
         flex:1,
         backgroundColor:'purple',
+        justifyContent:'center',
+        paddingHorizontal:'10%'
 
     },
     item:{
         height: 50,
-        width: '80%',
+        width: '70%',
         backgroundColor: 'white',
         marginVertical: '1%',
         borderRadius: 5,
