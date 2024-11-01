@@ -1,95 +1,120 @@
 import { FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
-const Additem = () => {
-    const [name, setName] = useState('');
-    const [item, setItem] = useState([]);
-    const addItem = () => {
-        setItem([...item, {id:item.length+1,value:name}])
-        setName('')
 
+const Additem = () => {
+    const [task, setTask] = useState('');
+    const [item, setItem] = useState([
+        { id: 1, name: 'apple' },
+        { id: 2, name: 'Mango' }
+    ])
+    const addItem = () => {
+        if (task.length > 0) {
+            let newItem = { id: item.length + 1, name: task }
+            setItem([...item, newItem])
+            setTask('');
+        }
+    }
+    const removeItem=(ids)=>{
+       let newitemlist=item.filter((i)=>i.id !=ids)
+       setItem(newitemlist)
     }
     return (
         <View style={styles.container}>
-            <Text>Additem</Text>
-            <View style={styles.MainBox}>
-                <TextInput
-                    placeholder='Type something' onChangeText={(i) => setName(i)}
-                    value={name}
-                    placeholderTextColor={'blue'}
-                    style={styles.textBox}
+            <View style={styles.header}>
+                <Text style={styles.headerText}>Todo list</Text>
+            </View>
+            <View style={styles.main}>
+                <TextInput placeholder='Type something....'
+                    value={task}
+                    onChangeText={(text) => setTask(text)}
+                    style={styles.textInputBox}
                 />
-                <TouchableOpacity style={styles.button}
-                    onPress={addItem}>
-                    <Text style={styles.textC}>Add item</Text>
+                <TouchableOpacity onPress={addItem}
+                    style={styles.button}>
+                    <Text>Add item</Text>
                 </TouchableOpacity>
-
-
-            </View>
-            <View style={styles.listBox}>
-            {
-                item.map((val,idx)=><View key={idx}
-                style={styles.listitem}>
-                    <Text>{val}</Text>
-                </View>)
-            }
+                <FlatList data={item}
+                    keyExtractor={(item) => item.id}
+                    renderItem={({ item }) => (<View style={styles.listItem}>
+                        <Text>{item.name}</Text>
+                        <TouchableOpacity
+                        onPress={()=>removeItem(item.id)}
+                        style={styles.removeButton}><Text>Remove</Text></TouchableOpacity>
+                    </View>)} />
 
             </View>
-
 
 
         </View>
     )
 }
+
 export default Additem
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'purple'
-    },
-    MainBox: {
-        height: '20%',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-around'
-
-
-    },
-    textBox: {
-        height: '50%',
         backgroundColor: 'white',
-        width: '60%',
-        borderRadius: 10,
-        paddingHorizontal: 10,
-        color: 'blue'
-
+        paddingHorizontal: '4%',
+        // backgroundColor:'red'
     },
-    button: {
-        height: '50%',
-        width: '30%',
-        backgroundColor: 'white',
-        borderRadius: 10,
+    header: {
+        height: '10%',
+        // backgroundColor:'red',
         justifyContent: 'center',
         alignItems: 'center'
 
 
     },
-    textC: {
-        color: 'blue',
+    main: {
+        height: '90%',
+        width: '100%',
+        // backgroundColor:'red'
+    },
+    headerText: {
+        fontSize: 20,
         fontWeight: 'bold'
     },
-    listBox:{
-        height: '70%',
+    textInputBox: {
+        // backgroundColor:'red',
+        height: '10%',
+        width: '100%',
+        borderWidth: 1,
+        borderRadius: 5,
+        paddingHorizontal: 10,
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginBottom: '5%'
 
-        paddingHorizontal:10
 
     },
-    listitem:{
-        height:'10%',
-        backgroundColor:'blue',
-        margin:'5%',
-        paddingHorizontal:10,
-        borderRadius:10,
-        justifyContent:'center'
-    }
+    button: {
+        height: '7%',
+        // backgroundColor:'red',
+        width: '30%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 5,
+        borderWidth: 1,
+        backgroundColor: ''
+    },
+    listItem: {
+        height: 90,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingHorizontal: "10%",
+        backgroundColor: '#e5e1de',
+        marginVertical: '5%',
+        alignItems: 'center',
+        borderRadius: 10
+    },
+    removeButton:{
+        backgroundColor:'tomato',
+        height:'50%',
+        width:'30%',
+        justifyContent:'center',
+        alignItems:'center',
+        borderRadius:5
 
+    }
 })
