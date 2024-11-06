@@ -1,51 +1,41 @@
-import { FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { FlatList, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 
 const Additem = () => {
-    const [task, setTask] = useState('');
-    const [item, setItem] = useState([
-        { id: 1, name: 'apple' },
-        { id: 2, name: 'Mango' }
-    ])
+    const [text, setText] = useState('')
+    const [items, setItems] = useState([{ id: 1, name: 'anil' }])
     const addItem = () => {
-        if (task.length > 0) {
-            let newItem = { id: item.length + 1, name: task }
-            setItem([...item, newItem])
-            setTask('');
+        if (text) {
+            let newItem = { id: items.length + 1, name: text }
+            setItems([...items, newItem]);
+            setText('')
+
         }
     }
-    const removeItem=(ids)=>{
-       let newitemlist=item.filter((i)=>i.id !=ids)
-       setItem(newitemlist)
-    }
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <View style={styles.header}>
-                <Text style={styles.headerText}>Todo list</Text>
+                <Text style={styles.headerFont}>ToDo listapp</Text>
             </View>
             <View style={styles.main}>
-                <TextInput placeholder='Type something....'
-                    value={task}
-                    onChangeText={(text) => setTask(text)}
+                <TextInput placeholder='Enter Item name'
+                    placeholderTextColor={'black'}
                     style={styles.textInputBox}
-                />
-                <TouchableOpacity onPress={addItem}
-                    style={styles.button}>
-                    <Text>Add item</Text>
+                    value={text}
+                    onChangeText={(val) => setText(val)} />
+                <TouchableOpacity style={styles.addItemButton}
+                    onPress={addItem}>
+                    <Text style={styles.buttonFont}>Add item</Text>
                 </TouchableOpacity>
-                <FlatList data={item}
+                <FlatList
+                    data={items}
                     keyExtractor={(item) => item.id}
-                    renderItem={({ item }) => (<View style={styles.listItem}>
-                        <Text>{item.name}</Text>
-                        <TouchableOpacity
-                        onPress={()=>removeItem(item.id)}
-                        style={styles.removeButton}><Text>Remove</Text></TouchableOpacity>
-                    </View>)} />
-
+                    renderItem={({ item }) => <View style={styles.listItem}>
+                        <Text style={styles.itemFont}>{item.name}</Text>
+                    </View>} />
             </View>
-
-
-        </View>
+            <View style={styles.footer}></View>
+        </SafeAreaView>
     )
 }
 
@@ -54,67 +44,63 @@ export default Additem
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white',
-        paddingHorizontal: '4%',
-        // backgroundColor:'red'
+        backgroundColor: 'skyblue',
+        paddingHorizontal: '1%'
     },
     header: {
-        height: '10%',
-        // backgroundColor:'red',
+        flex: 1,
+        // backgroundColor: 'red',
         justifyContent: 'center',
         alignItems: 'center'
-
-
     },
     main: {
-        height: '90%',
-        width: '100%',
-        // backgroundColor:'red'
+        flex: 4,
+        // backgroundColor: 'blue',
+        paddingHorizontal: '5%'
     },
-    headerText: {
-        fontSize: 20,
-        fontWeight: 'bold'
+    headerFont: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: 'black'
     },
     textInputBox: {
-        // backgroundColor:'red',
-        height: '10%',
-        width: '100%',
+        height: 60,
         borderWidth: 1,
+        width: '95%',
+        paddingHorizontal: '5%',
         borderRadius: 5,
-        paddingHorizontal: 10,
-        fontSize: 20,
         fontWeight: 'bold',
-        marginBottom: '5%'
-
-
+        color: 'black'
     },
-    button: {
-        height: '7%',
-        // backgroundColor:'red',
+    addItemButton: {
+        height: 50,
         width: '30%',
+        marginVertical: '3%',
+        borderRadius: 5,
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 5,
-        borderWidth: 1,
-        backgroundColor: ''
+        backgroundColor: 'tomato',
+
+    },
+    buttonFont: {
+        fontSize: 14,
+        fontWeight: '500',
+        color: 'black'
+
     },
     listItem: {
-        height: 90,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingHorizontal: "10%",
-        backgroundColor: '#e5e1de',
-        marginVertical: '5%',
-        alignItems: 'center',
-        borderRadius: 10
-    },
-    removeButton:{
-        backgroundColor:'tomato',
-        height:'50%',
-        width:'30%',
-        justifyContent:'center',
-        alignItems:'center',
-        borderRadius:5
+        height: 50,
+        width: '95%',
+        justifyContent: 'center',
+        paddingHorizontal: '5%',
+        marginTop: '5%',
+        borderRadius: 5,
+        backgroundColor: 'white',
 
+    },
+    itemFont: {
+        fontSize: 17,
+        color: 'black',
+        fontWeight: '500'
     }
 })
