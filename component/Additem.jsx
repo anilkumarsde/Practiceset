@@ -3,14 +3,18 @@ import React, { useState } from 'react'
 
 const Additem = () => {
     const [text, setText] = useState('')
-    const [items, setItems] = useState([{ id: 1, name: 'anil' }])
+    const [flag, setFlag] = useState(true)
+    const [items, setItems] = useState([])
     const addItem = () => {
         if (text) {
             let newItem = { id: items.length + 1, name: text }
             setItems([...items, newItem]);
             setText('')
-
         }
+    }
+    const removeItem=(id)=>{
+       let newItemlist= items.filter((item)=>item.id!==id)
+       setItems(newItemlist);
     }
     return (
         <SafeAreaView style={styles.container}>
@@ -32,15 +36,17 @@ const Additem = () => {
                     keyExtractor={(item) => item.id}
                     renderItem={({ item }) => <View style={styles.listItem}>
                         <Text style={styles.itemFont}>{item.name}</Text>
+                        <TouchableOpacity style={styles.tickButton}
+                        onPress={()=>removeItem(item.id)}>
+                            <Text>Remove</Text>
+                        </TouchableOpacity>
                     </View>} />
             </View>
             <View style={styles.footer}></View>
         </SafeAreaView>
     )
 }
-
 export default Additem
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -91,16 +97,27 @@ const styles = StyleSheet.create({
     listItem: {
         height: 50,
         width: '95%',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         paddingHorizontal: '5%',
         marginTop: '5%',
         borderRadius: 5,
         backgroundColor: 'white',
+        flexDirection: 'row',
+        alignItems: 'center'
 
     },
     itemFont: {
         fontSize: 17,
         color: 'black',
         fontWeight: '500'
+    },
+    tickButton: {
+        height: 40,
+        width: '30%',
+        marginVertical: '3%',
+        borderRadius: 5,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'green',
     }
 })
