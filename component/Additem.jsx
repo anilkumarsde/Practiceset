@@ -16,6 +16,7 @@ const Additem = () => {
        let newItemlist= items.filter((item)=>item.id!==id)
        setItems(newItemlist);
     }
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
@@ -40,6 +41,7 @@ const Additem = () => {
                         onPress={()=>removeItem(item.id)}>
                             <Text>Remove</Text>
                         </TouchableOpacity>
+
                     </View>} />
             </View>
             <View style={styles.footer}></View>
@@ -57,7 +59,8 @@ const styles = StyleSheet.create({
         flex: 1,
         // backgroundColor: 'red',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+
     },
     main: {
         flex: 4,
@@ -67,7 +70,8 @@ const styles = StyleSheet.create({
     headerFont: {
         fontSize: 24,
         fontWeight: 'bold',
-        color: 'black'
+        color: 'black',
+        fontFamily:'cursive'
     },
     textInputBox: {
         height: 60,
