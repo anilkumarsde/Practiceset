@@ -1,14 +1,16 @@
-import { FlatList, StyleSheet, Text, TextInput, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import Additem from './component/Additem'
-import ApiFirst from './component/api/ApiFirst'
-import ApiWithMap from './component/api/ApiWithMap'
-import Pract from './component/Pract'
+import RideDetailsScreen from './component/RideDetailsScreen'
+import Pr from './Src/Pr'
+import Todo from './Src/Todo'
+
+
 const App = () => {
   return (
-  <Pract />
-   )
+   <Todo />
+  )
 }
 
 export default App
+
 const styles = StyleSheet.create({})
