@@ -1,15 +1,18 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import FFF from './component/FFF'
 import Ppppp from './component/Ppppp'
-
-
 const App = () => {
   return (
- <Ppppp />
+    <SafeAreaView style={styles.container}>
+      <Ppppp />
+    </SafeAreaView>
   )
 }
 
 export default App
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  }
+})
